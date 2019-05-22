@@ -5,7 +5,7 @@ import numpy as np
 
 def without_defeated_strategy(table):
     table = np.array(table)
-    while (True):
+    while True:
         temp = sum(table.shape)
         table = shrink(table)
         if temp == sum(table.shape):
@@ -35,11 +35,10 @@ def shrink(table):
     dimension = table.shape[-1]
     for axis in range(dimension):
         for i in reversed(range(table.shape[axis])):
-            if (is_defeated_strategy(table=table, axis=axis, i=i, dimension=dimension)):
+            if is_defeated_strategy(table=table, axis=axis, i=i, dimension=dimension):
                 table = np.delete(arr=table, axis=axis, obj=i)
     return table
 
 
 def main(table):
-    good_game = without_defeated_strategy(table)
-    return good_game
+    return np.multiply(without_defeated_strategy(np.array(table) / 10), 10).tolist()
